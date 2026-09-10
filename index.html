@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Saatvik — A stay worth slowing down for</title>
+  
+  <!-- Lenis Smooth Scroll CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.20/dist/lenis.css">
+  
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            bone: '#F7F5F0',
+            'bone-dark': '#EFECE4',
+            charcoal: '#171513',
+            'charcoal-light': '#24211D',
+            terracotta: '#BC5D41',
+            'terracotta-soft': '#A24F36',
+            brass: '#C2A26F',
+            'brass-muted': '#A38757',
+            clay: '#736B64',
+            linen: '#FAF8F5',
+          },
+          letterSpacing: {
+            widest: '0.22em',
+            ultra: '0.3em',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* Custom refined animations & micro-interactions */
+    @keyframes heroScale {
+      0% { transform: scale(1.08); opacity: 0.88; }
+      100% { transform: scale(1.0); opacity: 1; }
+    }
+    @keyframes fadeInStagger {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+    @keyframes marqueeText {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    .hero-img-anim {
+      animation: heroScale 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .fade-up-1 {
+      animation: fadeInStagger 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+      opacity: 0;
+    }
+    .fade-up-2 {
+      animation: fadeInStagger 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+      opacity: 0;
+    }
+    .fade-up-3 {
+      animation: fadeInStagger 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+      opacity: 0;
+    }
+    .marquee-track {
+      display: flex;
+      width: 200%;
+      animation: marqueeText 35s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+    
+    /* Interactive line reveal hover */
+    .editorial-link {
+      position: relative;
+    }
+    .editorial-link::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      bottom: -2px;
+      left: 0;
+      background-color: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .editorial-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    
+    /* Subtle image hover scale */
+    .img-zoom-container {
+      overflow: hidden;
+    }
+    .img-zoom-target {
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+    }
+    .img-zoom-container:hover .img-zoom-target {
+      transform: scale(1.035);
+    }
+
+    
+    /* Grain overlay for paper-like warmth */
+    .paper-grain {
+      background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+  </style>
+</head>
+<body class="bg-bone text-charcoal font-sans antialiased selection:bg-terracotta selection:text-bone">
+
+  <!-- ========================================================================= -->
+  <!-- NAVIGATION BAR -->
+  <!-- ========================================================================= -->
+  <header id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-6 px-8 md:px-16 text-bone">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Brand Logo / Wordmark -->
+      <a href="#" class="group flex items-center gap-3.5 tracking-ultra font-serif text-2xl uppercase font-light text-bone transition-colors duration-300">
+        <div class="w-9 h-9 rounded-full bg-white/95 p-1 flex items-center justify-center shadow-md border border-brass/40 group-hover:border-terracotta group-hover:scale-105 transition-all duration-300">
+          <img src="saatvik-emblem-transparent.png" alt="Saatvik Emblem" class="w-full h-full object-contain">
+        </div>
+        <span class="tracking-[0.28em]">Saatvik</span>
+      </a>
+
+      <!-- Center Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-10 text-xs tracking-widest uppercase font-medium">
+        <a href="#rooms" class="editorial-link hover:text-brass transition-colors py-1">Rooms</a>
+        <a href="#restaurant" class="editorial-link hover:text-brass transition-colors py-1">Restaurant</a>
+        <a href="#rooftop" class="editorial-link hover:text-brass transition-colors py-1">Rooftop</a>
+        <a href="#about" class="editorial-link hover:text-brass transition-colors py-1">About</a>
+        <a href="#location" class="editorial-link hover:text-brass transition-colors py-1">Journal & Location</a>
+      </nav>
+
+      <!-- Right Action CTA -->
+      <div class="flex items-center space-x-6">
+        <a href="#book" class="group inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-bone/30 text-xs uppercase tracking-widest hover:border-bone hover:bg-bone hover:text-charcoal transition-all duration-400">
+          <span>Book a Stay</span>
+          <svg class="w-3 h-3 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- HERO SECTION (Sticky, slides underneath the main content) -->
+  <!-- ========================================================================= -->
+  <section id="hero-section" class="sticky top-0 z-0 h-screen min-h-[640px] flex items-end justify-start overflow-hidden bg-charcoal will-change-transform">
+    <!-- Cinematic Full-screen Background Image with Subtle Parallax & Slow Scale -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+      <img 
+        id="hero-bg"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU3RM01k0gbTevi4CPdztYKoyZFPSGAYc9PUMTKs3swak_RyT078OTfZlLkZouFCqKuLfAt34yCo_N86qpZEatd-jSOaTb-AuhnUKHwAvkSds3eE5LdSvFpc1ywP0u33p7X8xDK2EAtv7laTYFbNKq2VCsz1BxutDNpRfGnBzdj_asQsPJ1OV2TXRVmQd0GwmrC4OwrjyBIJWf-WIGcgIUthtcoP2eH6GY6Gl1ohZZ1unTV6QNaj9m" 
+        alt="Hotel Saatvik internal courtyard and serene sunlit lounge" 
+        class="hero-img-anim w-full h-full object-cover object-center transform will-change-transform brightness-[0.88] contrast-[1.03]"
+      />
+      <!-- Handcrafted Editorial Vignette: Soft gradient for typography readability -->
+      <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-charcoal/40 mix-blend-multiply"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/20 to-transparent"></div>
+      
+      <!-- Depth dimming overlay that darkens smoothly as Section 2 slides over -->
+      <div id="hero-curtain-overlay" class="absolute inset-0 bg-charcoal/70 opacity-0 pointer-events-none transition-opacity duration-75"></div>
+    </div>
+
+    <!-- Hero Content Overlay -->
+    <div id="hero-content" class="relative z-10 w-full max-w-7xl mx-auto px-8 md:px-16 pb-16 md:pb-20 pt-36 md:pt-44 flex flex-col justify-end text-bone will-change-transform">
+      
+      <!-- Eyebrow Tagline -->
+      <div class="fade-up-1 flex items-center gap-3 mb-6">
+        <span class="h-[1px] w-8 bg-brass"></span>
+        <span class="text-xs uppercase tracking-ultra font-medium text-brass">Hotel Saatvik &middot; Sanctuary of Stillness</span>
+      </div>
+
+      <!-- Main Editorial Headline -->
+      <h1 class="fade-up-2 font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-[1.22] tracking-tight max-w-4xl text-bone mb-8">
+        A stay worth <br class="hidden sm:inline">
+        <span class="inline-flex items-center align-middle">
+          <span id="roller-box" class="inline-block relative overflow-hidden h-[1.48em] transition-[width] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+            <span id="roller-track" class="flex flex-col will-change-transform">
+              <span class="roller-item h-[1.48em] inline-flex w-max items-center whitespace-nowrap italic font-light text-brass font-serif pr-2 py-1">slowing down</span>
+              <span class="roller-item h-[1.48em] inline-flex w-max items-center whitespace-nowrap italic font-light text-brass font-serif pr-2 py-1">lingering</span>
+              <span class="roller-item h-[1.48em] inline-flex w-max items-center whitespace-nowrap italic font-light text-brass font-serif pr-2 py-1">unwinding</span>
+              <span class="roller-item h-[1.48em] inline-flex w-max items-center whitespace-nowrap italic font-light text-brass font-serif pr-2 py-1">returning</span>
+              <span class="roller-item h-[1.48em] inline-flex w-max items-center whitespace-nowrap italic font-light text-brass font-serif pr-2 py-1">slowing down</span>
+            </span>
+          </span>
+          <span class="italic font-light text-bone/90 font-serif ml-1.5">for.</span>
+        </span>
+      </h1>
+
+      <!-- Supporting Body and CTAs -->
+      <div class="fade-up-3 flex flex-col md:flex-row md:items-end justify-between gap-8 pt-4 border-t border-bone/20">
+        <p class="max-w-md text-sm md:text-base font-light text-bone/80 leading-relaxed font-sans">
+          Thoughtfully sculpted suites, rooted regional gastronomy, and intimate golden evenings set high above the ancient stone silhouette.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-5">
+          <a href="#rooms" class="group px-7 py-3.5 bg-bone text-charcoal rounded-full text-xs uppercase tracking-widest font-medium hover:bg-brass hover:text-charcoal transition-all duration-300 flex items-center gap-3">
+            <span>Explore Saatvik</span>
+            <svg class="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          
+          <a href="#book" class="px-7 py-3.5 border border-bone/40 rounded-full text-xs uppercase tracking-widest font-medium text-bone hover:border-bone hover:bg-bone/10 transition-all duration-300">
+            Book your stay
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN CONTENT CONTAINER: Smoothly slides over the hero with depth shadow -->
+  <!-- ========================================================================= -->
+  <main id="main-content" class="relative z-20 bg-bone shadow-[0_-30px_70px_rgba(0,0,0,0.45)] rounded-t-[32px] md:rounded-t-[48px] border-t border-bone-dark/40 overflow-hidden">
+
+  <!-- ========================================================================= -->
+  <!-- INTRODUCTION / PHILOSOPHY (Asymmetrical Magazine Layout) -->
+  <!-- ========================================================================= -->
+  <section id="about" class="relative py-28 md:py-36 px-8 md:px-16 bg-bone paper-grain border-b border-charcoal/10 overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Subtle section header -->
+      <div class="flex items-center gap-4 mb-16">
+        <span class="text-xs uppercase tracking-ultra font-semibold text-terracotta">01 / The Saatvik Experience</span>
+        <span class="h-[1px] flex-1 bg-charcoal/10"></span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        
+        <!-- Large Serif Statement -->
+        <div class="lg:col-span-7">
+          <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl font-normal leading-[1.12] text-charcoal tracking-tight">
+            Not simply a place to stay. <br>
+            <span class="italic font-light text-terracotta">A place to arrive.</span>
+          </h2>
+
+          <div class="mt-10 space-y-6 text-charcoal-light/80 text-base md:text-lg font-light leading-relaxed max-w-xl">
+            <p>
+              Saatvik was conceived as a respite from the rapid velocity of modern transit. Situated between ancient stone ramparts and rustling neem groves, our architecture borrows from historical Indian havelis—subdued lime-washed surfaces, filtered sunbeams through carved jali screens, and cooling courtyards designed for deep quietude.
+            </p>
+            <p class="text-sm md:text-base text-clay leading-relaxed">
+              Every detail has been curated without decorative excess: raw unlacquered brass that patinas with time, hand-knotted jute rugs, and bespoke dark teak wood carved by local master artisans.
+            </p>
+          </div>
+
+          <!-- Architectural Specifications / Refined Micro-Details -->
+          <div class="grid grid-cols-3 gap-6 pt-12 mt-12 border-t border-charcoal/10 text-charcoal">
+            <div>
+              <div class="font-serif text-3xl font-light text-charcoal">18</div>
+              <div class="text-[11px] uppercase tracking-widest text-clay mt-1">Quiet Suites</div>
+            </div>
+            <div>
+              <div class="font-serif text-3xl font-light text-charcoal">300<span class="text-sm font-sans text-terracotta">°</span></div>
+              <div class="text-[11px] uppercase tracking-widest text-clay mt-1">Horizon Rooftop</div>
+            </div>
+            <div>
+              <div class="font-serif text-3xl font-light text-charcoal">100%</div>
+              <div class="text-[11px] uppercase tracking-widest text-clay mt-1">Seasonal Harvest</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offset Architectural Detail Image (Asymmetric composition) -->
+        <div class="lg:col-span-5 lg:pt-12">
+          <div class="relative img-zoom-container rounded-sm shadow-xl bg-charcoal">
+            <img 
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3CZb_FKYW52PKCMeZ2_rcGmf7BJwg52yUGEI84A_FePhE4_Ca6G4Ok48DMJfyBrlSNaCgGWzzVI1b2EmUEERNgHZw6KK54apGvOqqK7n2qscUbzH49pBYmFpGLsnREBv7O0QmspJtRY-NRR1GFCJkaB8bpAR4Hdm2lgPn2lKse1zFoIaXYiIJOh4DUSMOG9522kcYBhkb9D5cWPdx6aIdR0za6hrtzFmdBhKS9mdxgvg4Z9r-mhnO" 
+              alt="Hand-chiseled stone soaking tub and terracotta lime plaster in guest suite" 
+              class="img-zoom-target w-full aspect-[4/5] object-cover object-center brightness-95"
+            />
+            <div class="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-charcoal/80 to-transparent text-bone">
+              <span class="text-[10px] uppercase tracking-ultra text-brass block mb-1">Sensory Sanctuary</span>
+              <p class="font-serif text-lg italic text-bone/90">Free-standing hand-hewn sandstone bath & warm terracotta lime wash.</p>
+            </div>
+          </div>
+          <div class="mt-4 flex justify-between text-[11px] tracking-widest text-clay uppercase">
+            <span>Plate 01 &middot; Tactile Plaster</span>
+            <span>Architectural Wing</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- EXPERIENCE TICKER STRIP -->
+  <!-- ========================================================================= -->
+  <div class="py-5 bg-charcoal text-bone/80 overflow-hidden border-y border-bone/10 select-none">
+    <div class="marquee-track flex items-center space-x-12 text-xs uppercase tracking-ultra font-light">
+      <span>Deluxe &amp; Heritage Suites</span>
+      <span class="text-brass">&bull;</span>
+      <span>Farmstead Indian Gastronomy</span>
+      <span class="text-brass">&bull;</span>
+      <span>Sunset Sunset Cocktails Over Old City</span>
+      <span class="text-brass">&bull;</span>
+      <span>Mindful Hospitality &amp; Unrushed Mornings</span>
+      <span class="text-brass">&bull;</span>
+      <span>Limewashed Stone &amp; Teak Joinery</span>
+      <span class="text-brass">&bull;</span>
+      <span>Deluxe &amp; Heritage Suites</span>
+      <span class="text-brass">&bull;</span>
+      <span>Farmstead Indian Gastronomy</span>
+      <span class="text-brass">&bull;</span>
+      <span>Sunset Cocktails Over Old City</span>
+      <span class="text-brass">&bull;</span>
+      <span>Mindful Hospitality &amp; Unrushed Mornings</span>
+      <span class="text-brass">&bull;</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- ROOMS SECTION (Interactive Suite Browser) -->
+  <!-- ========================================================================= -->
+  <section id="rooms" class="py-28 md:py-36 px-8 md:px-16 bg-bone-dark/50 border-b border-charcoal/10 relative">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <span class="text-xs uppercase tracking-ultra font-semibold text-terracotta">02 / The Chambers</span>
+          <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl text-charcoal font-normal mt-3 tracking-tight">
+            Rooms made for <br>
+            <span class="italic font-light text-terracotta">unhurried mornings.</span>
+          </h2>
+        </div>
+        <p class="max-w-md text-sm text-clay font-light leading-relaxed">
+          Each chamber is an acoustic and visual sanctuary dressed in organic unbleached ivory linens, custom raw teak joinery, and warm brass accents.
+        </p>
+      </div>
+
+      <!-- Interactive Room Showcase Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-stretch">
+        
+        <!-- Large Active Suite Image Showcase (Changes dynamically with click or hover) -->
+        <div class="lg:col-span-7 flex flex-col justify-between">
+          <div class="relative w-full h-[460px] md:h-[560px] rounded-sm overflow-hidden bg-charcoal shadow-2xl">
+            <img 
+              id="room-display-img"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiaub8VX6osfRG98JNObUbexeRMIsdTMVbbm7blbOJdje5QRS-Djl7K9K4d4L18N_P9RWAGjiRj4yQNijozyja3WXPZJoc-KuhIiGAXN6k7uPnWYz_aSIyYle8aXoeH4ixrE6P4CMWgs3gQZofdPyTS6j7V5WaiBrEk07MabxmuVdmsz4v-AhVw_ntKKFWZYCOGjPeIsFK9vb_radVPtJj2g8yy9nkXWbQqxikNKlPJ40CVFKTcxnq" 
+              alt="Deluxe Garden Suite interior bedroom" 
+              class="w-full h-full object-cover transition-opacity duration-700 ease-in-out"
+            />
+            <!-- Dynamic Room Badge Tag -->
+            <div class="absolute top-6 left-6 px-4 py-1.5 bg-charcoal/80 backdrop-blur-sm rounded-full text-bone text-xs uppercase tracking-widest border border-bone/20">
+              <span id="room-badge">Master Suite &middot; 68 m²</span>
+            </div>
+            
+            <div class="absolute bottom-6 left-6 right-6 p-6 bg-gradient-to-t from-charcoal/90 via-charcoal/60 to-transparent text-bone rounded-b">
+              <p id="room-quote" class="font-serif text-xl italic text-bone/95 font-light">
+                "Waking up to filtered sunlight and total silence in the heart of the city."
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between text-xs tracking-widest text-clay uppercase mt-4">
+            <span id="room-occupancy">Max 2 Guests &middot; King Bed</span>
+            <span>Complimentary Artisan Breakfast</span>
+          </div>
+        </div>
+
+        <!-- Suite Selection List (Clickable Interactive Items) -->
+        <div class="lg:col-span-5 flex flex-col justify-center space-y-4">
+          
+          <!-- Room 01: Suite (Active) -->
+          <div 
+            onclick="selectRoom('suite')"
+            id="room-card-suite"
+            class="room-card cursor-pointer p-6 rounded-sm border-l-2 border-terracotta bg-bone shadow-sm hover:shadow-md transition-all duration-300"
+          >
+            <div class="flex items-center justify-between text-xs tracking-ultra text-terracotta uppercase font-semibold mb-2">
+              <span>01 / Signature</span>
+              <span>From ₹18,500 / night</span>
+            </div>
+            <h3 class="font-serif text-2xl text-charcoal font-normal">The Haveli Heritage Suite</h3>
+            <p class="text-xs text-clay font-light leading-relaxed mt-2 mb-4">
+              Private carved jali balcony, freestanding sandstone soaking tub, and vaulted ceiling overlooking the inner citrus grove.
+            </p>
+            <div class="flex items-center justify-between pt-3 border-t border-charcoal/10 text-xs text-charcoal font-medium">
+              <span class="text-clay">68 m² &middot; Private Balcony</span>
+              <span class="inline-flex items-center gap-1 text-terracotta group">
+                Reserve Chamber &rarr;
+              </span>
+            </div>
+          </div>
+
+          <!-- Room 02: Deluxe Courtyard -->
+          <div 
+            onclick="selectRoom('deluxe')"
+            id="room-card-deluxe"
+            class="room-card cursor-pointer p-6 rounded-sm border-l-2 border-transparent bg-bone/70 hover:bg-bone hover:border-brass transition-all duration-300"
+          >
+            <div class="flex items-center justify-between text-xs tracking-ultra text-clay uppercase font-semibold mb-2">
+              <span>02 / Chamber</span>
+              <span>From ₹14,000 / night</span>
+            </div>
+            <h3 class="font-serif text-2xl text-charcoal font-normal">Deluxe Courtyard Chamber</h3>
+            <p class="text-xs text-clay font-light leading-relaxed mt-2 mb-4">
+              Ground-level sanctuary opening directly onto the tranquil lime-washed atrium, complete with rain shower and tea station.
+            </p>
+            <div class="flex items-center justify-between pt-3 border-t border-charcoal/10 text-xs text-charcoal">
+              <span class="text-clay">46 m² &middot; Courtyard Access</span>
+              <span class="inline-flex items-center gap-1 text-clay">
+                View Chamber &rarr;
+              </span>
+            </div>
+          </div>
+
+          <!-- Room 03: Terrace Pavilion -->
+          <div 
+            onclick="selectRoom('pavilion')"
+            id="room-card-pavilion"
+            class="room-card cursor-pointer p-6 rounded-sm border-l-2 border-transparent bg-bone/70 hover:bg-bone hover:border-brass transition-all duration-300"
+          >
+            <div class="flex items-center justify-between text-xs tracking-ultra text-clay uppercase font-semibold mb-2">
+              <span>03 / Penthouse</span>
+              <span>From ₹24,000 / night</span>
+            </div>
+            <h3 class="font-serif text-2xl text-charcoal font-normal">The Terrace Pavilion</h3>
+            <p class="text-xs text-clay font-light leading-relaxed mt-2 mb-4">
+              Perched on the upper tier with private terracotta terrace sunbeds and direct view of historical temple domes at dusk.
+            </p>
+            <div class="flex items-center justify-between pt-3 border-t border-charcoal/10 text-xs text-charcoal">
+              <span class="text-clay">82 m² &middot; Private Sundeck</span>
+              <span class="inline-flex items-center gap-1 text-clay">
+                View Chamber &rarr;
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- RESTAURANT SECTION (Atmospheric Dining) -->
+  <!-- ========================================================================= -->
+  <section id="restaurant" class="py-28 md:py-36 px-8 md:px-16 bg-charcoal text-bone relative overflow-hidden">
+    <!-- Subtle warm glow in background -->
+    <div class="absolute -top-40 right-0 w-[500px] h-[500px] rounded-full bg-terracotta/10 blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Restaurant Header -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end mb-16">
+        <div class="lg:col-span-7">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-7 h-7 rounded-full bg-white/95 p-1 flex items-center justify-center shadow-sm border border-brass/30">
+              <img src="saatvik-emblem-transparent.png" alt="Saatvik Culinary Emblem" class="w-full h-full object-contain">
+            </div>
+            <span class="text-xs uppercase tracking-ultra font-semibold text-brass">03 / Dining &amp; Hearth</span>
+          </div>
+          <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl font-normal leading-[1.08] mt-3 tracking-tight text-bone">
+            Come hungry. <br>
+            <span class="italic font-light text-brass">Leave remembering.</span>
+          </h2>
+        </div>
+        <div class="lg:col-span-5">
+          <p class="text-sm md:text-base text-bone/70 font-light leading-relaxed mb-6">
+            “Seasonal plates, familiar flavours, and a table worth lingering around.” Our hearth celebrates age-old clay oven methods, heritage grains, and unhurried conversation.
+          </p>
+          <a href="#book-table" class="inline-flex items-center gap-3 text-xs uppercase tracking-widest text-brass hover:text-bone transition-colors py-1 editorial-link">
+            <span>Discover the Seasonal Menu &amp; Reserve</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Atmospheric Restaurant Dual Gallery -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+        
+        <!-- Large Warm Interior View -->
+        <div class="md:col-span-7 img-zoom-container rounded-sm overflow-hidden bg-charcoal-light shadow-2xl relative">
+          <img 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuChOHZxRrVnISUPa6Ec9StBXu7aB7Rj-iPPW26iGRPElkDLIsBDA724USu0Y41Nvy7SxCNnX41GhGyRDro7eM3aNOdVKgQe8PfVS_APrVm63iWyBFjmMIYEa0oVTso5hKSMYM0j45lamfftuLV36TEdAXYdICAyxtKA8MgZnVXYUul8p0hctgcfM8PwxTEuLJUhE7qZTJ3ZikSrJm_-ShYBDth2bgndX_eo73HsgmrbBbimZdZyafk4" 
+            alt="Intimate candlelit dining room at Hotel Saatvik under terracotta plaster arches" 
+            class="img-zoom-target w-full h-[450px] md:h-[540px] object-cover object-center brightness-90"
+          />
+          <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between text-xs text-bone/80 uppercase tracking-widest">
+            <span>The Hearth &middot; 7:00 PM onwards</span>
+            <span>Intimate Candlelight Seating</span>
+          </div>
+        </div>
+
+        <!-- Plated Gastronomy Still Life -->
+        <div class="md:col-span-5 flex flex-col justify-between space-y-6">
+          <div class="img-zoom-container rounded-sm overflow-hidden bg-charcoal-light shadow-2xl relative">
+            <img 
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmhymf-vNlZYWP4zuSNj4sy0iiEtxiL8iksuhbGBCsdrqbe5FcOhICnanoK65ZbfOEdfo6eIyw0gOOIw5PtdjQ4SXQWl9EiHQpvUa9nMtWXfy0uZKD8D3aTgvu6skHdTumKIkKXxIYOVFmK5fLRgfdHWd0YxDdmUYDugrt42Gdnzp9n1hMnTPVzi0dtn-PY1LFyyYb14VCH5PveB_ugIdGTV38tMMPt8u6Gs2nsqM5NAjIrdyFEBx5" 
+              alt="Artisanal tandoor heirloom vegetables on handmade charcoal ceramic stoneware" 
+              class="img-zoom-target w-full h-[340px] md:h-[400px] object-cover object-center"
+            />
+            <div class="p-4 bg-charcoal-light text-bone/90 border-t border-bone/10">
+              <span class="text-[10px] uppercase tracking-ultra text-brass block">Culinary Craft</span>
+              <p class="font-serif text-base italic text-bone/90 mt-1">Heirloom root vegetables roasted in earthen tandoor with saffron spiced emulsion.</p>
+            </div>
+          </div>
+
+          <!-- Quote Box -->
+          <div class="p-6 rounded-sm bg-bone/5 border border-bone/10">
+            <div class="text-brass font-serif text-3xl mb-2">“</div>
+            <p class="text-sm font-light text-bone/80 italic font-serif leading-relaxed">
+              No fussy theatrical foam or pretension. Just slow-simmered spices, freshly ground stone flours, and recipes handed down across generations.
+            </p>
+            <div class="text-[10px] uppercase tracking-widest text-bone/50 mt-4">Head Chef &middot; Raghavan Sharma</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- ROOFTOP SECTION — VISUAL CLIMAX -->
+  <!-- ========================================================================= -->
+  <section id="rooftop" class="relative py-32 md:py-44 px-8 md:px-16 bg-charcoal text-bone overflow-hidden">
+    <!-- Cinematic Panoramic Rooftop Golden Hour Background -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        id="rooftop-bg"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAppkbdKCrAb1joTsJok24Pizjkcz62GLvC6K0eGnHN5uX-biafN1cpsGNNamx3XpEtrI0F-r505B77syD_UgDvQX1xsi7Qq7QNE1tbIvHfcj4-fPJ2bcUy75YscXK7IJVvgjWL1t4MYwRhByKH_TLmsAnpHTTflXumoG4XZur6GeQvnYZ63xieW14a4wg67X05_b4gkZXk8i4IxF_8AavmvYfOq6jp73b6sRmUiDO0t_7LzztzBGzF" 
+        alt="Hotel Saatvik rooftop terrace bar lounge overlooking sunset city skyline" 
+        class="w-full h-full object-cover object-center brightness-[0.75] contrast-[1.05] will-change-transform transform scale-[1.02] transition-transform duration-1000"
+      />
+      <!-- Dramatic warm atmospheric overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-transparent to-charcoal/80"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto flex flex-col items-center text-center">
+      
+      <!-- Subtle Floating Location/Time Widget -->
+      <div class="inline-flex items-center gap-4 px-5 py-2 rounded-full bg-charcoal/60 backdrop-blur-md border border-bone/20 text-xs tracking-widest uppercase mb-8 text-bone/90">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+        <span>Rooftop Level 05 &middot; Golden Hour: 5:30 PM &ndash; Twilight</span>
+      </div>
+
+      <h2 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-[1.05] tracking-tight max-w-4xl text-bone mb-6">
+        Above the city, <br>
+        <span class="italic font-light text-brass">the evening begins.</span>
+      </h2>
+
+      <p class="max-w-xl text-base sm:text-lg font-light text-bone/85 leading-relaxed font-sans mb-10">
+        Golden hour, cold brass goblets, aromatic woodsmoke, and a table positioned gently above the city's ancient stone horizon.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-6">
+        <a href="#book" class="px-8 py-4 bg-terracotta text-bone rounded-full text-xs uppercase tracking-widest font-medium hover:bg-terracotta-soft transition-all duration-300 shadow-xl flex items-center gap-3">
+          <span>Experience the Rooftop</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+
+        <a href="#cocktails" class="px-8 py-4 border border-bone/30 rounded-full text-xs uppercase tracking-widest font-medium text-bone hover:bg-bone/10 transition-colors">
+          View Aperitif &amp; Tapas List
+        </a>
+      </div>
+
+      <!-- Sunset Details Bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 mt-20 border-t border-bone/20 w-full max-w-4xl text-bone/80 text-xs tracking-widest uppercase">
+        <div>
+          <div class="text-brass font-serif text-xl normal-case">Botanical Infusions</div>
+          <div class="text-[10px] text-bone/50 mt-1">Forged with garden herbs</div>
+        </div>
+        <div>
+          <div class="text-brass font-serif text-xl normal-case">Unobstructed Sky</div>
+          <div class="text-[10px] text-bone/50 mt-1">360° Sunset Panorama</div>
+        </div>
+        <div>
+          <div class="text-brass font-serif text-xl normal-case">Ambient Vinyl</div>
+          <div class="text-[10px] text-bone/50 mt-1">Acoustic evening sessions</div>
+        </div>
+        <div>
+          <div class="text-brass font-serif text-xl normal-case">Olive &amp; Terracotta</div>
+          <div class="text-[10px] text-bone/50 mt-1">Natural open-air terrace</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- ABOUT / PHILOSOPHY STORYTELLING -->
+  <!-- ========================================================================= -->
+  <section class="py-28 md:py-36 px-8 md:px-16 bg-bone paper-grain border-b border-charcoal/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+        
+        <!-- Photographic architectural vignette -->
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="relative rounded-sm overflow-hidden shadow-xl bg-charcoal">
+            <img 
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU3RM01k0gbTevi4CPdztYKoyZFPSGAYc9PUMTKs3swak_RyT078OTfZlLkZouFCqKuLfAt34yCo_N86qpZEatd-jSOaTb-AuhnUKHwAvkSds3eE5LdSvFpc1ywP0u33p7X8xDK2EAtv7laTYFbNKq2VCsz1BxutDNpRfGnBzdj_asQsPJ1OV2TXRVmQd0GwmrC4OwrjyBIJWf-WIGcgIUthtcoP2eH6GY6Gl1ohZZ1unTV6QNaj9m" 
+              alt="Hand-crafted wood furniture and lime wash walls at Hotel Saatvik" 
+              class="w-full aspect-[4/3] object-cover object-center filter grayscale contrast-[1.08] hover:grayscale-0 transition-all duration-700"
+            />
+            <div class="p-6 bg-bone-dark/80 text-charcoal border-t border-charcoal/10">
+              <span class="text-[10px] uppercase tracking-ultra text-terracotta block">Ethos</span>
+              <p class="font-serif text-base italic text-charcoal mt-1">"Restraint is the highest form of hospitality."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Storytelling copy -->
+        <div class="lg:col-span-7 order-1 lg:order-2">
+          <span class="text-xs uppercase tracking-ultra font-semibold text-terracotta">04 / Our Philosophy</span>
+          <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl text-charcoal font-normal mt-3 mb-8 tracking-tight">
+            Hospitality, <br>
+            <span class="italic font-light text-terracotta">without the unnecessary.</span>
+          </h2>
+
+          <div class="space-y-6 text-charcoal-light/80 text-base md:text-lg font-light leading-relaxed">
+            <p>
+              Too many luxury hotels mistake complexity for excellence. They overwhelm with digital screens, excessive gold trim, and formal rigidity that creates distance rather than comfort.
+            </p>
+            <p>
+              At Hotel Saatvik, true hospitality means knowing when to step back. It is found in chilled spring water served in clay tumblers, freshly washed cotton robes, beds dressed for genuine sleep, and staff who remember how you take your morning tea without asking twice.
+            </p>
+            <p class="text-sm text-clay font-sans">
+              We invite travelers to step out of the relentless itinerary and surrender to the timeless rhythm of the sun moving across our courtyard arches.
+            </p>
+          </div>
+
+          <div class="pt-8 mt-8 border-t border-charcoal/10 flex items-center gap-8">
+            <div>
+              <div class="font-serif text-xl text-charcoal">Anand &amp; Gayatri Varma</div>
+              <div class="text-[11px] uppercase tracking-widest text-clay">Custodians &amp; Founders</div>
+            </div>
+            <div class="h-8 w-[1px] bg-charcoal/20"></div>
+            <div class="text-xs text-clay italic font-serif">
+              Built with reverence in 2024
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- LOCATION & JOURNAL (Stylized Minimal Map & Distances) -->
+  <!-- ========================================================================= -->
+  <section id="location" class="py-24 md:py-32 px-8 md:px-16 bg-bone-dark/40 border-b border-charcoal/10">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <span class="text-xs uppercase tracking-ultra font-semibold text-terracotta">05 / The Environs</span>
+          <h2 class="font-serif text-4xl sm:text-5xl text-charcoal font-normal mt-2 tracking-tight">
+            Tucked in stillness, <span class="italic font-light text-clay">near it all.</span>
+          </h2>
+        </div>
+        <a href="#directions" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-terracotta font-medium editorial-link">
+          <span>Get Private Chauffeur Coordinates</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Stylized Architectural Line Map & Transit Times -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-bone rounded-sm p-8 md:p-12 border border-charcoal/10 shadow-sm">
+        
+        <!-- Stylized Location Card -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="space-y-2">
+            <div class="text-xs uppercase tracking-widest text-clay">Address</div>
+            <div class="font-serif text-2xl text-charcoal font-normal">
+              14 Heritage Haveli Lane, Old Fort Precinct, <br>
+              Udaipur / Jaipur Gateway, India
+            </div>
+          </div>
+
+          <p class="text-sm text-clay font-light leading-relaxed">
+            Nestled inside a pedestrian-prioritized heritage quarter. While outside the bustling old bazaars pulse with spice merchants and silversmiths, our courtyard remains deeply silent.
+          </p>
+
+          <!-- Line-based Key Distances -->
+          <div class="space-y-4 pt-4 border-t border-charcoal/10 text-xs">
+            <div class="flex items-center justify-between py-1 border-b border-charcoal/5">
+              <span class="font-medium text-charcoal">City Palace &amp; Lake Pier</span>
+              <span class="text-clay">8 mins by private buggy</span>
+            </div>
+            <div class="flex items-center justify-between py-1 border-b border-charcoal/5">
+              <span class="font-medium text-charcoal">Historic Clock Tower Bazaar</span>
+              <span class="text-clay">4 mins walk</span>
+            </div>
+            <div class="flex items-center justify-between py-1 border-b border-charcoal/5">
+              <span class="font-medium text-charcoal">International Airport (UDR/JAI)</span>
+              <span class="text-clay">35 mins executive transfer</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stylized Minimal Architectural Plot Illustration -->
+        <div class="lg:col-span-6 flex flex-col items-center justify-center p-8 bg-bone-dark/50 rounded border border-charcoal/10 relative overflow-hidden">
+          <svg class="w-full h-64 text-charcoal/70" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Stylized topographical lines -->
+            <path d="M20 180C100 160 160 220 240 190C320 160 360 200 390 190" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3 3" opacity="0.4"/>
+            <path d="M10 120C90 100 150 140 230 110C310 80 350 120 390 110" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3 3" opacity="0.4"/>
+            <path d="M30 60C110 40 170 80 250 50C330 20 370 60 390 50" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3 3" opacity="0.4"/>
+            
+            <!-- Axis lines -->
+            <line x1="200" y1="20" x2="200" y2="220" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+            <line x1="20" y1="120" x2="380" y2="120" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+            
+            <!-- Saatvik Pin Point -->
+            <circle cx="200" cy="120" r="28" stroke="#BC5D41" stroke-width="1" stroke-dasharray="4 4" class="animate-spin" style="animation-duration: 20s;"/>
+            <circle cx="200" cy="120" r="7" fill="#BC5D41"/>
+            <circle cx="200" cy="120" r="3" fill="#F7F5F0"/>
+            
+            <text x="200" y="165" font-family="'Cormorant Garamond', Georgia" font-size="16" fill="#171513" text-anchor="middle" font-weight="500">HOTEL SAATVIK</text>
+            <text x="200" y="180" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="#736B64" text-anchor="middle" letter-spacing="2">24.5854° N, 73.7125° E</text>
+            
+            <!-- Surrounding landmark points -->
+            <circle cx="110" cy="80" r="3" fill="#A38757"/>
+            <text x="110" y="70" font-family="'Plus Jakarta Sans'" font-size="8" fill="#736B64" text-anchor="middle">Lake Waterfront</text>
+            
+            <circle cx="310" cy="150" r="3" fill="#A38757"/>
+            <text x="310" y="165" font-family="'Plus Jakarta Sans'" font-size="8" fill="#736B64" text-anchor="middle">Old Ramparts</text>
+          </svg>
+          <div class="text-[10px] uppercase tracking-widest text-clay text-center mt-2">Private Sanctuary Coordinates</div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- FINAL CONVERSION SECTION (Quiet Luxury Booking) -->
+  <!-- ========================================================================= -->
+  <section id="book" class="py-32 md:py-44 px-8 md:px-16 bg-charcoal text-bone text-center relative overflow-hidden">
+    <!-- Subtle architectural background glow -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU3RM01k0gbTevi4CPdztYKoyZFPSGAYc9PUMTKs3swak_RyT078OTfZlLkZouFCqKuLfAt34yCo_N86qpZEatd-jSOaTb-AuhnUKHwAvkSds3eE5LdSvFpc1ywP0u33p7X8xDK2EAtv7laTYFbNKq2VCsz1BxutDNpRfGnBzdj_asQsPJ1OV2TXRVmQd0GwmrC4OwrjyBIJWf-WIGcgIUthtcoP2eH6GY6Gl1ohZZ1unTV6QNaj9m" alt="" class="w-full h-full object-cover filter blur-sm">
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+      <div class="w-12 h-12 rounded-full bg-white/95 p-1.5 shadow-md border border-brass/40 flex items-center justify-center mb-5">
+        <img src="saatvik-emblem-transparent.png" alt="Saatvik Emblem" class="w-full h-full object-contain">
+      </div>
+      <span class="text-xs uppercase tracking-ultra font-semibold text-brass mb-4">Reservations &amp; Stays</span>
+      
+      <h2 class="font-serif text-4xl sm:text-6xl md:text-7xl font-normal leading-[1.08] tracking-tight text-bone mb-6">
+        Your room is waiting. <br>
+        <span class="italic font-light text-brass">Make a little time for Saatvik.</span>
+      </h2>
+
+      <p class="max-w-lg text-base font-light text-bone/70 leading-relaxed mb-12">
+        We maintain just eighteen guest chambers to safeguard serenity and attentive intimacy. Bookings include morning artisan dining and evening rooftop access.
+      </p>
+
+      <!-- Minimal Reservation Form / Date Picker Bar -->
+      <div class="w-full max-w-3xl bg-bone-dark/10 backdrop-blur-md border border-bone/20 p-4 md:p-6 rounded-sm mb-8 text-left grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+        
+        <div>
+          <label class="block text-[10px] uppercase tracking-widest text-bone/50 mb-1">Check-in</label>
+          <input type="date" value="2025-04-12" class="w-full bg-transparent border-b border-bone/30 pb-1 text-bone font-medium focus:outline-none focus:border-brass">
+        </div>
+
+        <div>
+          <label class="block text-[10px] uppercase tracking-widest text-bone/50 mb-1">Check-out</label>
+          <input type="date" value="2025-04-15" class="w-full bg-transparent border-b border-bone/30 pb-1 text-bone font-medium focus:outline-none focus:border-brass">
+        </div>
+
+        <div>
+          <label class="block text-[10px] uppercase tracking-widest text-bone/50 mb-1">Chamber Type</label>
+          <select class="w-full bg-transparent border-b border-bone/30 pb-1 text-bone font-medium focus:outline-none focus:border-brass">
+            <option class="bg-charcoal text-bone">Heritage Suite (68 m²)</option>
+            <option class="bg-charcoal text-bone">Deluxe Courtyard (46 m²)</option>
+            <option class="bg-charcoal text-bone">Terrace Pavilion (82 m²)</option>
+          </select>
+        </div>
+
+        <div class="flex items-end">
+          <button class="w-full py-2.5 bg-terracotta hover:bg-terracotta-soft text-bone uppercase tracking-widest text-[11px] font-medium transition-colors rounded-sm">
+            Check Availability
+          </button>
+        </div>
+
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-8 text-xs text-bone/60 tracking-wider">
+        <span>&check; Direct booking privileges</span>
+        <span>&check; Flexible cancellation up to 48 hrs</span>
+        <span>&check; Bespoke arrival transfer</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- FOOTER (Editorial & Understated) -->
+  <!-- ========================================================================= -->
+  <footer class="py-20 px-8 md:px-16 bg-charcoal-light text-bone/80 border-t border-bone/10 text-xs">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-bone/10">
+        
+        <!-- Brand identity -->
+        <div class="md:col-span-5 space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-full bg-white p-1.5 shadow-lg border border-brass/30 flex items-center justify-center flex-shrink-0">
+              <img src="saatvik-emblem-transparent.png" alt="Hotel Saatvik Emblem" class="w-full h-full object-contain">
+            </div>
+            <div>
+              <div class="font-serif text-2xl uppercase tracking-[0.25em] text-bone font-light">
+                Saatvik
+              </div>
+              <div class="text-[10px] uppercase tracking-widest text-brass font-medium mt-0.5">Hotel &middot; Restaurant &middot; Banquet &middot; Rooftop</div>
+            </div>
+          </div>
+          <p class="max-w-sm text-bone/60 leading-relaxed font-light">
+            A quiet sanctuary celebrating boutique Indian hospitality, tactile architectural serenity, and unhurried gastronomy.
+          </p>
+          <div class="pt-2">
+            <span class="italic font-serif text-brass text-sm">“Stay a little slower.”</span>
+          </div>
+
+          <!-- Social Links with Demo Icons -->
+          <div class="pt-3">
+            <div class="text-[10px] uppercase tracking-ultra text-bone/50 font-semibold mb-2.5">Follow &middot; Connect</div>
+            <div class="flex items-center gap-2.5">
+              <!-- Instagram -->
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="group w-8 h-8 rounded-full border border-bone/20 bg-bone/5 hover:border-brass hover:bg-brass/15 hover:text-brass flex items-center justify-center text-bone/70 transition-all duration-300">
+                <svg class="w-3.5 h-3.5 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              <!-- Facebook -->
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="group w-8 h-8 rounded-full border border-bone/20 bg-bone/5 hover:border-brass hover:bg-brass/15 hover:text-brass flex items-center justify-center text-bone/70 transition-all duration-300">
+                <svg class="w-3.5 h-3.5 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <!-- WhatsApp -->
+              <a href="https://wa.me/912942894400" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="group w-8 h-8 rounded-full border border-bone/20 bg-bone/5 hover:border-brass hover:bg-brass/15 hover:text-brass flex items-center justify-center text-bone/70 transition-all duration-300">
+                <svg class="w-3.5 h-3.5 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.159.57 4.187 1.564 5.942l-1.637 5.98 6.136-1.61c1.704.935 3.659 1.468 5.74 1.468 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
+                </svg>
+              </a>
+              <!-- Pinterest -->
+              <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" class="group w-8 h-8 rounded-full border border-bone/20 bg-bone/5 hover:border-brass hover:bg-brass/15 hover:text-brass flex items-center justify-center text-bone/70 transition-all duration-300">
+                <svg class="w-3.5 h-3.5 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/>
+                </svg>
+              </a>
+              <!-- YouTube -->
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="group w-8 h-8 rounded-full border border-bone/20 bg-bone/5 hover:border-brass hover:bg-brass/15 hover:text-brass flex items-center justify-center text-bone/70 transition-all duration-300">
+                <svg class="w-3.5 h-3.5 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="md:col-span-3 space-y-3">
+          <div class="text-[10px] uppercase tracking-ultra text-bone font-semibold mb-4">Navigation</div>
+          <div><a href="#rooms" class="hover:text-brass transition-colors">The Chambers &amp; Suites</a></div>
+          <div><a href="#restaurant" class="hover:text-brass transition-colors">The Hearth Restaurant</a></div>
+          <div><a href="#rooftop" class="hover:text-brass transition-colors">The Skyline Rooftop</a></div>
+          <div><a href="#about" class="hover:text-brass transition-colors">Philosophy &amp; Founders</a></div>
+          <div><a href="#location" class="hover:text-brass transition-colors">Arrival &amp; Heritage Quarter</a></div>
+        </div>
+
+        <!-- Inquiries & Contact -->
+        <div class="md:col-span-4 space-y-3">
+          <div class="text-[10px] uppercase tracking-ultra text-bone font-semibold mb-4">Direct Concierge</div>
+          <div class="text-bone/70">reservations@hotelsaatvik.com</div>
+          <div class="text-bone/70">+91 (294) 289 4400 / Concierge WhatsApp</div>
+          <div class="text-bone/50 pt-2 leading-relaxed">
+            14 Heritage Haveli Lane, Old Fort Quarter, Rajasthan, India
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Credits -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-bone/40 text-[11px] gap-4">
+        <div>&copy; 2025 Hotel Saatvik. All rights reserved. Crafted with timeless care.</div>
+        <div class="flex flex-wrap items-center gap-6">
+          <a href="#" class="hover:text-bone transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-bone transition-colors">House Guidelines</a>
+          <div class="flex items-center gap-4 pl-2 border-l border-bone/20 text-bone/60">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-brass transition-colors flex items-center gap-1.5" title="Instagram">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              <span>@hotelsaatvik</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  </main>
+
+  <!-- Lenis Smooth Scroll Library -->
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: Scroll Effects, Room Selector, and Micro-interactions -->
+  <!-- ========================================================================= -->
+  <script>
+    // 1. Initialize Lenis Smooth Scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1.8,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // 2. Navigation & Sticky Hero Curtain Slide-Over via Lenis
+    const mainNav = document.getElementById('main-nav');
+    const heroSection = document.getElementById('hero-section');
+    const heroBg = document.getElementById('hero-bg');
+    const heroContent = document.getElementById('hero-content');
+    const heroCurtainOverlay = document.getElementById('hero-curtain-overlay');
+    
+    lenis.on('scroll', ({ scroll }) => {
+      const scrollPos = scroll;
+      const vh = window.innerHeight;
+      
+      // Sticky nav styling
+      if (scrollPos > 80) {
+        mainNav.classList.remove('py-6', 'text-bone');
+        mainNav.classList.add('py-4', 'bg-charcoal/90', 'backdrop-blur-md', 'shadow-lg', 'text-bone', 'border-b', 'border-bone/10');
+      } else {
+        mainNav.classList.remove('py-4', 'bg-charcoal/90', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-bone/10');
+        mainNav.classList.add('py-6', 'text-bone');
+      }
+
+      // Smooth slide-over depth effects as Section 2 covers the hero
+      if (scrollPos <= vh + 100) {
+        if (heroSection && heroSection.style.visibility !== 'visible') {
+          heroSection.style.visibility = 'visible';
+        }
+        const progress = Math.min(1, Math.max(0, scrollPos / vh));
+
+        // Darken the hero smoothly as the curtain slides over for cinematic depth
+        if (heroCurtainOverlay) {
+          heroCurtainOverlay.style.opacity = (progress * 0.65).toFixed(3);
+        }
+
+        // Hero content subtly recedes in 3D (moves slightly up and scales down)
+        if (heroContent) {
+          heroContent.style.transform = `translateY(-${progress * 60}px) scale(${1 - progress * 0.04})`;
+          heroContent.style.opacity = (1 - progress * 0.8).toFixed(3);
+        }
+
+        // Background image slow parallax
+        if (heroBg) {
+          heroBg.style.transform = `translateY(${progress * 60}px) scale(${1.0 + progress * 0.04})`;
+        }
+      } else {
+        // Performance optimization: hide hero once fully covered
+        if (heroSection && heroSection.style.visibility !== 'hidden') {
+          heroSection.style.visibility = 'hidden';
+        }
+      }
+    });
+
+    // 3. Smooth Anchor Link Scrolling with Lenis
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#' || targetId === '') {
+          e.preventDefault();
+          lenis.scrollTo(0, { duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+          return;
+        }
+        const targetElem = document.querySelector(targetId);
+        if (targetElem) {
+          e.preventDefault();
+          lenis.scrollTo(targetElem, {
+            offset: -40,
+            duration: 1.4,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          });
+        }
+      });
+    });
+
+    // 4. Interactive Room Showcase Data and Selector
+    const roomData = {
+      suite: {
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCiaub8VX6osfRG98JNObUbexeRMIsdTMVbbm7blbOJdje5QRS-Djl7K9K4d4L18N_P9RWAGjiRj4yQNijozyja3WXPZJoc-KuhIiGAXN6k7uPnWYz_aSIyYle8aXoeH4ixrE6P4CMWgs3gQZofdPyTS6j7V5WaiBrEk07MabxmuVdmsz4v-AhVw_ntKKFWZYCOGjPeIsFK9vb_radVPtJj2g8yy9nkXWbQqxikNKlPJ40CVFKTcxnq',
+        badge: 'Master Suite · 68 m²',
+        quote: '"Waking up to filtered sunlight and total silence in the heart of the city."',
+        occupancy: 'Max 2 Guests · King Bed · Balcony'
+      },
+      deluxe: {
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBU3RM01k0gbTevi4CPdztYKoyZFPSGAYc9PUMTKs3swak_RyT078OTfZlLkZouFCqKuLfAt34yCo_N86qpZEatd-jSOaTb-AuhnUKHwAvkSds3eE5LdSvFpc1ywP0u33p7X8xDK2EAtv7laTYFbNKq2VCsz1BxutDNpRfGnBzdj_asQsPJ1OV2TXRVmQd0GwmrC4OwrjyBIJWf-WIGcgIUthtcoP2eH6GY6Gl1ohZZ1unTV6QNaj9m',
+        badge: 'Deluxe Chamber · 46 m²',
+        quote: '"Lime-washed bone walls, cooling shaded colonnades, and quiet courtyard breeze."',
+        occupancy: 'Max 2 Guests · Queen Bed · Courtyard Atrium'
+      },
+      pavilion: {
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAppkbdKCrAb1joTsJok24Pizjkcz62GLvC6K0eGnHN5uX-biafN1cpsGNNamx3XpEtrI0F-r505B77syD_UgDvQX1xsi7Qq7QNE1tbIvHfcj4-fPJ2bcUy75YscXK7IJVvgjWL1t4MYwRhByKH_TLmsAnpHTTflXumoG4XZur6GeQvnYZ63xieW14a4wg67X05_b4gkZXk8i4IxF_8AavmvYfOq6jp73b6sRmUiDO0t_7LzztzBGzF',
+        badge: 'Penthouse Pavilion · 82 m²',
+        quote: '"Perched under the amber twilight sky with unobstructed views of temple spires."',
+        occupancy: 'Max 3 Guests · California King · Private Sundeck'
+      }
+    };
+
+    function selectRoom(roomKey) {
+      const data = roomData[roomKey];
+      if (!data) return;
+
+      const imgElem = document.getElementById('room-display-img');
+      const badgeElem = document.getElementById('room-badge');
+      const quoteElem = document.getElementById('room-quote');
+      const occupancyElem = document.getElementById('room-occupancy');
+
+      // Crossfade transition
+      imgElem.style.opacity = '0.2';
+      
+      setTimeout(() => {
+        imgElem.src = data.img;
+        badgeElem.textContent = data.badge;
+        quoteElem.textContent = data.quote;
+        occupancyElem.textContent = data.occupancy;
+        imgElem.style.opacity = '1';
+      }, 250);
+
+      // Active border styling update
+      const cards = ['suite', 'deluxe', 'pavilion'];
+      cards.forEach(k => {
+        const cardElem = document.getElementById(`room-card-${k}`);
+        if (k === roomKey) {
+          cardElem.classList.add('border-terracotta', 'bg-bone', 'shadow-sm');
+          cardElem.classList.remove('border-transparent', 'bg-bone/70');
+        } else {
+          cardElem.classList.remove('border-terracotta', 'bg-bone', 'shadow-sm');
+          cardElem.classList.add('border-transparent', 'bg-bone/70');
+        }
+      });
+    }
+
+    // 5. Hero Headline Rotating Text Roll-up
+    const rollerBox = document.getElementById('roller-box');
+    const rollerTrack = document.getElementById('roller-track');
+    const rollerItems = document.querySelectorAll('.roller-item');
+
+    if (rollerBox && rollerTrack && rollerItems.length > 0) {
+      let currentIndex = 0;
+      const uniqueCount = 4; // 4 unique words
+      const transitionDuration = 700; // ms
+
+      function updateRollerSize() {
+        const activeItem = rollerItems[currentIndex % uniqueCount];
+        if (activeItem) {
+          rollerBox.style.width = `${Math.ceil(activeItem.getBoundingClientRect().width)}px`;
+          rollerBox.style.height = `${activeItem.offsetHeight}px`;
+        }
+      }
+
+      // Initial measurement after fonts load
+      if (document.fonts) {
+        document.fonts.ready.then(updateRollerSize);
+      }
+      updateRollerSize();
+
+      window.addEventListener('resize', () => {
+        updateRollerSize();
+        const itemHeight = rollerItems[0].offsetHeight;
+        rollerTrack.style.transition = 'none';
+        rollerTrack.style.transform = `translateY(-${currentIndex * itemHeight}px)`;
+      });
+
+      setInterval(() => {
+        currentIndex++;
+        const itemHeight = rollerItems[0].offsetHeight;
+        
+        rollerTrack.style.transition = `transform ${transitionDuration}ms cubic-bezier(0.16, 1, 0.3, 1)`;
+        rollerTrack.style.transform = `translateY(-${currentIndex * itemHeight}px)`;
+
+        // Seamlessly animate width for subsequent word so 'for.' glides naturally
+        const nextItem = rollerItems[currentIndex % uniqueCount];
+        if (nextItem) {
+          rollerBox.style.width = `${Math.ceil(nextItem.getBoundingClientRect().width)}px`;
+        }
+
+        // Loop reset on reaching the cloned first word
+        if (currentIndex === uniqueCount) {
+          setTimeout(() => {
+            rollerTrack.style.transition = 'none';
+            currentIndex = 0;
+            rollerTrack.style.transform = 'translateY(0px)';
+          }, transitionDuration);
+        }
+      }, 2800);
+    }
+  </script>
+</body>
+</html>
